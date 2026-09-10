@@ -198,18 +198,18 @@ export const ResumePage: React.FC = () => {
       {analysis && (
         <div className="space-y-6">
           {/* Main Score Banner */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-slate-100">
-              <div className="flex items-center gap-5">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/25">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5">
+                <div className="flex h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/25">
                   <div className="text-center">
-                    <span className="text-2xl font-black">{analysis.score}</span>
+                    <span className="text-xl sm:text-2xl font-black">{analysis.score}</span>
                     <span className="text-[10px] block opacity-80">/ 100</span>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-xl font-bold text-slate-900">Overall Resume Score</h2>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900">Overall Resume Score</h2>
                     <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       {analysis.score >= 75 ? 'Placement Ready' : 'Needs Optimization'}
                     </span>
@@ -337,11 +337,11 @@ export const ResumePage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
                 <select
                   value={selectedJobId || ''}
                   onChange={(e) => setSelectedJobId(Number(e.target.value))}
-                  className="px-3 py-2 text-xs rounded-xl border border-indigo-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+                  className="w-full sm:w-auto px-3 py-2 text-xs rounded-xl border border-indigo-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
                 >
                   {jobs.map((j) => (
                     <option key={j.id} value={j.id}>
@@ -353,7 +353,7 @@ export const ResumePage: React.FC = () => {
                 <button
                   onClick={handleCompareJob}
                   disabled={isComparing}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors shadow-sm disabled:opacity-50"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors shadow-sm disabled:opacity-50 text-center justify-center"
                 >
                   {isComparing ? 'Comparing...' : 'Compare Fit'}
                 </button>

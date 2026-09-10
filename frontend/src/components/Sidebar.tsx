@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -9,7 +9,7 @@ import {
   Milestone,
   UserCheck,
   Sparkles,
-  ExternalLink
+  X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -23,17 +23,45 @@ const navItems = [
   { name: 'Profile & Settings', path: '/app/profile', icon: UserCheck },
 ];
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   const { user } = useAuth();
 
-  return (
-    <aside className="w-64 flex-shrink-0 border-r border-slate-200 bg-white min-h-[calc(100vh-4rem)] flex flex-col justify-between p-4">
+  // Close drawer on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const renderContent = () => (
+    <div className="flex flex-col justify-between h-full space-y-6">
       <div className="space-y-6">
         {/* User Mini Profile Card */}
         {user && (
           <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-200/80">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-bold text-sm shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-bold text-sm shadow-sm flex-shrink-0">
                 {user.full_name.split(' ').map(n => n[0]).join('')}
               </div>
               <div className="min-w-0 flex-1">
@@ -61,6 +89,7 @@ export const Sidebar: React.FC = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={onClose}
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium transition-all ${
                     isActive
@@ -87,6 +116,45 @@ export const Sidebar: React.FC = () => {
           Autonomous matching, NLP resume parsing, and real-time interview evaluation engine.
         </p>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar (hidden on mobile/tablet < md) */}
+      <aside className="hidden md:flex w-64 flex-shrink-0 border-r border-slate-200 bg-white min-h-[calc(100vh-4rem)] flex-col justify-between p-4 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+        {renderContent()}
+      </aside>
+
+      {/* Mobile & Tablet Slide-over Drawer */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 md:hidden flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+            onClick={onClose}
+            aria-hidden="true"
+          />
+
+          {/* Drawer Panel */}
+          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-white p-5 shadow-2xl z-50 overflow-y-auto">
+            {/* Drawer Header with Close Button */}
+            <div className="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Navigation Menu</span>
+              <button
+                type="button"
+                onClick={onClose}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {renderContent()}
+          </div>
+        </div>
+      )}
+    </>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Compass,
@@ -13,13 +13,16 @@ import {
   Award,
   Users,
   Star,
-  ChevronRight
+  ChevronRight,
+  Menu,
+  X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const LandingPage: React.FC = () => {
   const { demoLogin } = useAuth();
   const navigate = useNavigate();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const handleDemoClick = async () => {
     await demoLogin();
@@ -30,15 +33,15 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-slate-900 text-white selection:bg-brand-500 selection:text-white">
       {/* Top Header */}
       <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 shadow-md shadow-brand-500/25">
+        <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 shadow-md shadow-brand-500/25 flex-shrink-0">
               <Compass className="h-5 w-5 text-white" />
             </div>
             <div>
-              <span className="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+              <span className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5 sm:gap-2">
                 CareerCompass
-                <span className="rounded-full bg-brand-500/20 px-2 py-0.5 text-[10px] font-semibold text-brand-300 border border-brand-500/30">
+                <span className="hidden xs:inline-block rounded-full bg-brand-500/20 px-2 py-0.5 text-[10px] font-semibold text-brand-300 border border-brand-500/30">
                   AI Placements
                 </span>
               </span>
@@ -52,13 +55,13 @@ export const LandingPage: React.FC = () => {
             <Link to="/app/jobs" className="hover:text-white transition-colors">Explore Jobs</Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <button
               onClick={handleDemoClick}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-brand-300 bg-brand-500/10 border border-brand-500/30 rounded-lg hover:bg-brand-500/20 transition-all"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs font-semibold text-brand-300 bg-brand-500/10 border border-brand-500/30 rounded-lg hover:bg-brand-500/20 transition-all"
             >
               <Sparkles className="h-3.5 w-3.5 text-brand-400" />
-              1-Click Demo
+              <span className="hidden xs:inline">1-Click </span>Demo
             </button>
             <Link
               to="/login"
@@ -68,27 +71,48 @@ export const LandingPage: React.FC = () => {
             </Link>
             <Link
               to="/signup"
-              className="px-4 py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-lg shadow-md shadow-brand-600/30 transition-all"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-lg shadow-md shadow-brand-600/30 transition-all"
             >
               Get Started
             </Link>
+            <button
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Nav Dropdown */}
+        {mobileNavOpen && (
+          <div className="md:hidden border-t border-slate-800 bg-slate-950/95 px-4 py-4 space-y-3 animate-slide-up">
+            <a href="#features" onClick={() => setMobileNavOpen(false)} className="block text-sm text-slate-300 hover:text-white py-1">Features</a>
+            <a href="#how-it-works" onClick={() => setMobileNavOpen(false)} className="block text-sm text-slate-300 hover:text-white py-1">How It Works</a>
+            <a href="#testimonials" onClick={() => setMobileNavOpen(false)} className="block text-sm text-slate-300 hover:text-white py-1">Success Stories</a>
+            <Link to="/app/jobs" onClick={() => setMobileNavOpen(false)} className="block text-sm text-slate-300 hover:text-white py-1">Explore Jobs</Link>
+            <div className="pt-3 border-t border-slate-800/80 flex gap-3">
+              <Link to="/login" onClick={() => setMobileNavOpen(false)} className="flex-1 text-center py-2 text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-800 rounded-xl">Log in</Link>
+              <Link to="/signup" onClick={() => setMobileNavOpen(false)} className="flex-1 text-center py-2 text-xs font-semibold text-white bg-brand-600 rounded-xl">Get Started</Link>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-28 lg:pt-28 lg:pb-36">
+      <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-28 lg:pb-36">
         {/* Glow backdrop */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand-500/15 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 left-1/3 w-[400px] h-[300px] bg-indigo-500/15 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[250px] sm:h-[350px] bg-brand-500/15 blur-[100px] sm:blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 left-1/3 w-[250px] sm:w-[400px] h-[200px] sm:h-[300px] bg-indigo-500/15 blur-[80px] sm:blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3.5 py-1 text-xs font-medium text-brand-300 mb-6">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 sm:px-3.5 py-1 text-[11px] sm:text-xs font-medium text-brand-300 mb-6">
             <Sparkles className="h-3.5 w-3.5" />
             AI & Data Science Degree Project • 2026 Edition
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.2] sm:leading-[1.15]">
             Build the skills. <br />
             <span className="bg-gradient-to-r from-brand-400 via-indigo-300 to-sky-300 bg-clip-text text-transparent">
               Find the opportunities.
@@ -96,21 +120,21 @@ export const LandingPage: React.FC = () => {
             Get career-ready.
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
             CareerCompass combines NLP resume parsing, semantic job matching, skill gap discovery, and AI-driven mock interviews to empower college students and freshers to land top tech roles.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
             <Link
               to="/signup"
-              className="flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-lg shadow-brand-600/30 hover:scale-105 transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-lg shadow-brand-600/30 hover:scale-105 transition-all"
             >
               Get Started Free
               <ArrowRight className="h-4 w-4" />
             </Link>
             <button
               onClick={handleDemoClick}
-              className="flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-xl transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-xl transition-all"
             >
               <Sparkles className="h-4 w-4 text-brand-400" />
               Explore Interactive Demo
@@ -335,16 +359,16 @@ export const LandingPage: React.FC = () => {
           <p className="mt-4 text-sm text-slate-400 max-w-xl mx-auto">
             Test your skills, optimize your resume, and simulate real technical interviews now.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-sm sm:max-w-none mx-auto">
             <Link
               to="/signup"
-              className="px-6 py-3 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all"
+              className="w-full sm:w-auto px-6 py-3 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all text-center"
             >
               Get Started Free
             </Link>
             <button
               onClick={handleDemoClick}
-              className="px-6 py-3 text-xs font-semibold text-brand-300 bg-brand-500/10 border border-brand-500/30 rounded-xl hover:bg-brand-500/20 transition-all"
+              className="w-full sm:w-auto px-6 py-3 text-xs font-semibold text-brand-300 bg-brand-500/10 border border-brand-500/30 rounded-xl hover:bg-brand-500/20 transition-all"
             >
               Explore Demo Account
             </button>

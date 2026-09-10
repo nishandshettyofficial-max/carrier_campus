@@ -29,35 +29,38 @@ export const JobCard: React.FC<JobCardProps> = ({
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+    <div className="rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
       <div>
         {/* Header: Title, Company, Match % */}
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <span className="text-xs font-semibold text-brand-600 tracking-wide uppercase">{job.company}</span>
-            <h3 className="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors cursor-pointer" onClick={() => onViewDetails(job)}>
+        <div className="flex items-start justify-between gap-2.5">
+          <div className="min-w-0 flex-1">
+            <span className="text-[11px] font-semibold text-brand-600 tracking-wide uppercase block truncate">{job.company}</span>
+            <h3
+              className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors cursor-pointer leading-snug"
+              onClick={() => onViewDetails(job)}
+            >
               {job.title}
             </h3>
           </div>
-          <div className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${getMatchBadge(match)}`}>
-            <Sparkles className="h-3.5 w-3.5" />
+          <div className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold border flex-shrink-0 ${getMatchBadge(match)}`}>
+            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             <span>{match}% Match</span>
           </div>
         </div>
 
         {/* Location, Type, Salary */}
-        <div className="mt-2.5 flex flex-wrap items-center gap-3 text-xs text-slate-500">
+        <div className="mt-2.5 flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-500">
           <span className="flex items-center gap-1">
-            <MapPin className="h-3.5 w-3.5 text-slate-400" />
-            {job.location}
+            <MapPin className="h-3.5 w-3.5 text-slate-400 flex-shrink-0" />
+            <span className="truncate">{job.location}</span>
           </span>
           <span className="flex items-center gap-1">
-            <Briefcase className="h-3.5 w-3.5 text-slate-400" />
-            {job.job_type} • {job.experience_level}
+            <Briefcase className="h-3.5 w-3.5 text-slate-400 flex-shrink-0" />
+            <span className="truncate">{job.job_type} • {job.experience_level}</span>
           </span>
           <span className="flex items-center gap-1 font-semibold text-slate-700">
-            <IndianRupee className="h-3.5 w-3.5 text-slate-400" />
-            {job.salary_range}
+            <IndianRupee className="h-3.5 w-3.5 text-slate-400 flex-shrink-0" />
+            <span>{job.salary_range}</span>
           </span>
         </div>
 
@@ -68,9 +71,9 @@ export const JobCard: React.FC<JobCardProps> = ({
 
         {/* Why this matches */}
         {job.why_matched && (
-          <div className="mt-3 rounded-lg bg-blue-50/70 p-2.5 text-[11px] text-blue-900 border border-blue-100 flex items-start gap-1.5">
+          <div className="mt-3 rounded-lg bg-blue-50/70 p-2 sm:p-2.5 text-[11px] text-blue-900 border border-blue-100 flex items-start gap-1.5">
             <Sparkles className="h-3.5 w-3.5 text-blue-600 flex-shrink-0 mt-0.5" />
-            <span>{job.why_matched}</span>
+            <span className="leading-snug">{job.why_matched}</span>
           </div>
         )}
 
@@ -81,7 +84,7 @@ export const JobCard: React.FC<JobCardProps> = ({
               <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Matching Skills</p>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {job.matching_skills.slice(0, 4).map((skill) => (
-                  <span key={skill} className="rounded-md bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700 border border-emerald-200">
+                  <span key={skill} className="rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-emerald-700 border border-emerald-200">
                     ✓ {skill}
                   </span>
                 ))}
@@ -99,7 +102,7 @@ export const JobCard: React.FC<JobCardProps> = ({
               <p className="text-[10px] font-bold uppercase tracking-wider text-rose-600">Missing Skills</p>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {job.missing_skills.slice(0, 3).map((skill) => (
-                  <span key={skill} className="rounded-md bg-rose-50 px-2 py-0.5 text-[11px] font-medium text-rose-700 border border-rose-200">
+                  <span key={skill} className="rounded-md bg-rose-50 px-2 py-0.5 text-[10px] sm:text-[11px] font-medium text-rose-700 border border-rose-200">
                     + {skill}
                   </span>
                 ))}
@@ -115,17 +118,19 @@ export const JobCard: React.FC<JobCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-2">
+      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
         <button
+          type="button"
           onClick={() => onViewDetails(job)}
-          className="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 transition-colors"
+          className="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 transition-colors py-1"
         >
-          View Details
+          Details
           <ArrowUpRight className="h-3.5 w-3.5" />
         </button>
 
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={() => onSaveToggle(job.id, !!job.is_saved)}
             className={`p-2 rounded-lg border text-xs transition-colors ${
               job.is_saved
@@ -138,9 +143,10 @@ export const JobCard: React.FC<JobCardProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onApply(job.id)}
             disabled={job.is_applied}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               job.is_applied
                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 cursor-default flex items-center gap-1'
                 : 'bg-brand-600 text-white hover:bg-brand-700 shadow-sm'

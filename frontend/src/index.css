@@ -43,3 +43,18 @@
 .badge-glow {
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
 }
+
+/* Hide scrollbar for clean horizontal chip navigation on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area inset support for mobile bottom navigation */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+}
+

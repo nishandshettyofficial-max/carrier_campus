@@ -122,10 +122,10 @@ export const JobsPage: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold text-slate-600">
+        <div className="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold text-slate-600 overflow-x-auto no-scrollbar w-full sm:w-auto">
           <button
             onClick={() => setActiveTab('all')}
-            className={`px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap flex-1 sm:flex-none text-center ${
               activeTab === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'
             }`}
           >
@@ -133,7 +133,7 @@ export const JobsPage: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('saved')}
-            className={`px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap flex-1 sm:flex-none text-center ${
               activeTab === 'saved' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'
             }`}
           >
@@ -141,7 +141,7 @@ export const JobsPage: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('applied')}
-            className={`px-3.5 py-1.5 rounded-lg transition-all ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap flex-1 sm:flex-none text-center ${
               activeTab === 'applied' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'
             }`}
           >

@@ -103,14 +103,14 @@ export const DashboardPage: React.FC = () => {
       )}
 
       {/* Greeting Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 sm:p-8 text-white shadow-md border border-slate-800">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-4 sm:p-6 lg:p-8 text-white shadow-md border border-slate-800">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-brand-500/20 px-3 py-1 text-xs font-semibold text-brand-300 border border-brand-500/30 mb-2">
               <Sparkles className="h-3.5 w-3.5 text-brand-400" />
               Target Career: {summary?.career_goal || user?.career_goal || 'Data Scientist'}
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
               Welcome back, {summary?.user_name || user?.full_name || 'Student'}!
             </h1>
             <p className="mt-1.5 text-xs sm:text-sm text-slate-300 max-w-xl">
@@ -118,17 +118,17 @@ export const DashboardPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-2.5 w-full sm:w-auto">
             <Link
               to="/app/interview"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 transition-colors shadow-sm"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 transition-colors shadow-sm"
             >
               <MessageSquareCode className="h-4 w-4" />
               Practice Interview
             </Link>
             <Link
               to="/app/resume"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-colors"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-colors"
             >
               <FileText className="h-4 w-4" />
               Scan Resume

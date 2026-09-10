@@ -114,12 +114,12 @@ export const SkillGapPage: React.FC = () => {
         </div>
 
         {/* Role Pill Selector */}
-        <div className="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+        <div className="flex flex-nowrap sm:flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 overflow-x-auto no-scrollbar w-full sm:w-auto">
           {CAREER_OPTIONS.map((role) => (
             <button
               key={role}
               onClick={() => handleRoleChange(role)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex-shrink-0 ${
                 selectedRole === role
                   ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80 font-bold'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
@@ -192,7 +192,7 @@ export const SkillGapPage: React.FC = () => {
 
               <div className="h-[280px] w-full mt-2">
                 <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={gapData.radar_data}>
+                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={gapData.radar_data}>
                     <PolarGrid stroke="#e2e8f0" />
                     <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 11 }} />
                     <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#94a3b8', fontSize: 10 }} />

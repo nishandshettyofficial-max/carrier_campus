@@ -60,12 +60,12 @@ export const RoadmapPage: React.FC = () => {
         </div>
 
         {/* Role Selector */}
-        <div className="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+        <div className="flex flex-nowrap sm:flex-wrap items-center gap-1.5 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 overflow-x-auto no-scrollbar w-full sm:w-auto">
           {CAREER_OPTIONS.map((role) => (
             <button
               key={role}
               onClick={() => setSelectedRole(role)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap flex-shrink-0 ${
                 selectedRole === role
                   ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80 font-bold'
                   : 'text-slate-600 hover:text-slate-900'
