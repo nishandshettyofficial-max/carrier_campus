@@ -1,6 +1,11 @@
 from typing import List, Dict, Any, Tuple
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+
+try:
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+    HAS_SKLEARN = True
+except ImportError:
+    HAS_SKLEARN = False
 from app.ai.ontology import normalize_skill
 
 def compute_job_match(
@@ -40,12 +45,19 @@ def compute_job_match(
     user_profile_text = f"{user_goal} {' '.join(user_skills)} candidate developer engineer analyst"
     job_full_text = f"{job_title} {job_description} {' '.join(required_skills)} {' '.join(preferred_skills)}"
 
-    try:
-        vectorizer = TfidfVectorizer(stop_words='english')
-        tfidf_matrix = vectorizer.fit_transform([user_profile_text, job_full_text])
-        sim = float(cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0])
-    except Exception:
-        sim = 0.4
+    sim = 0.4
+    if HAS_SKLEARN:
+        try:
+            vectorizer = TfidfVectorizer(stop_words='english')
+            tfidf_matrix = vectorizer.fit_transform([user_profile_text, job_full_text])
+            sim = float(cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0])
+        except Exception:
+            sim = 0.4
+    else:
+        u_words = set(user_profile_text.lower().split())
+        j_words = set(job_full_text.lower().split())
+        if u_words and j_words:
+            sim = float(len(u_words.intersection(j_words)) / len(u_words.union(j_words)))
 
     # Role title relevance bonus
     title_bonus = 0.0

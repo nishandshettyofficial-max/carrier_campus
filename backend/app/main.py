@@ -36,13 +36,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include Routers
-app.include_router(auth.router, prefix=settings.API_V1_STR)
-app.include_router(jobs.router, prefix=settings.API_V1_STR)
-app.include_router(resume.router, prefix=settings.API_V1_STR)
-app.include_router(skills.router, prefix=settings.API_V1_STR)
-app.include_router(interview.router, prefix=settings.API_V1_STR)
-app.include_router(dashboard.router, prefix=settings.API_V1_STR)
+# Include Routers with /api prefix
+app.include_router(auth.router, prefix="/api")
+app.include_router(jobs.router, prefix="/api")
+app.include_router(resume.router, prefix="/api")
+app.include_router(skills.router, prefix="/api")
+app.include_router(interview.router, prefix="/api")
+app.include_router(dashboard.router, prefix="/api")
+
+# Also include Routers without prefix for Vercel/serverless environments where /api is stripped
+app.include_router(auth.router, prefix="")
+app.include_router(jobs.router, prefix="")
+app.include_router(resume.router, prefix="")
+app.include_router(skills.router, prefix="")
+app.include_router(interview.router, prefix="")
+app.include_router(dashboard.router, prefix="")
 
 @app.get("/")
 def root():
@@ -54,5 +62,6 @@ def root():
     }
 
 @app.get("/api/health")
+@app.get("/health")
 def health_check():
     return {"status": "healthy", "service": "CareerCompass Backend"}

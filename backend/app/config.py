@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api"
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "sqlite:////tmp/career_compass.db" if os.getenv("VERCEL") else "sqlite:///./career_compass.db"
+        "sqlite:////tmp/career_compass.db" if (os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME") or not os.access(".", os.W_OK)) else "sqlite:///./career_compass.db"
     )
     SECRET_KEY: str = os.getenv("SECRET_KEY", "careercompass-super-secure-dev-secret-key-2026")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", os.getenv("GOOGLE_API_KEY", ""))
