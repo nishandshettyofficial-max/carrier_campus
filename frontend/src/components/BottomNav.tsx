@@ -23,7 +23,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenMore }) => {
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200/90 safe-area-bottom shadow-lg shadow-slate-900/10"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-200/90 dark:border-slate-800 safe-area-bottom shadow-lg shadow-slate-900/10 transition-colors duration-200"
     >
       <div className="grid grid-cols-5 h-14 items-center px-1 max-w-lg mx-auto">
         {tabs.map((tab) => {
@@ -35,8 +35,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenMore }) => {
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center py-1 rounded-xl transition-all ${
                   isActive
-                    ? 'text-brand-600 font-bold'
-                    : 'text-slate-500 hover:text-slate-900 font-medium'
+                    ? 'text-brand-600 dark:text-brand-400 font-bold'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium'
                 }`
               }
             >
@@ -44,7 +44,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenMore }) => {
                 <>
                   <div
                     className={`p-1 rounded-lg transition-colors ${
-                      isActive ? 'bg-brand-50' : ''
+                      isActive ? 'bg-brand-50 dark:bg-brand-950/70' : ''
                     }`}
                   >
                     <Icon className="h-5 w-5" />
@@ -60,7 +60,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onOpenMore }) => {
         <button
           type="button"
           onClick={onOpenMore}
-          className="flex flex-col items-center justify-center py-1 rounded-xl text-slate-500 hover:text-slate-900 font-medium transition-colors"
+          className="flex flex-col items-center justify-center py-1 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium transition-colors"
           aria-label="Open Full Menu"
         >
           <div className="p-1 rounded-lg">

@@ -101,21 +101,21 @@ export const InterviewPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700 border border-indigo-200 mb-2">
-            <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1 text-xs font-semibold text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900/50 mb-2">
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
             Interactive Mock Interview Simulator
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">AI Mock Interview Preparation</h1>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">AI Mock Interview Preparation</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Solve realistic technical, HR, and project questions. Receive instant scoring, key point verification, and model answers.
           </p>
         </div>
 
-        <div className="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold text-slate-600 overflow-x-auto no-scrollbar w-full sm:w-auto">
+        <div className="flex rounded-xl bg-slate-100 dark:bg-slate-900 p-1 text-xs font-semibold text-slate-600 dark:text-slate-400 overflow-x-auto no-scrollbar w-full sm:w-auto border border-slate-200/60 dark:border-slate-800">
           <button
             onClick={() => setActiveTab('practice')}
             className={`px-3 sm:px-3.5 py-1.5 rounded-lg transition-all whitespace-nowrap flex-1 sm:flex-none text-center ${
-              activeTab === 'practice' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'
+              activeTab === 'practice' ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm' : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Practice Simulator
@@ -123,7 +123,7 @@ export const InterviewPage: React.FC = () => {
           <button
             onClick={() => setActiveTab('history')}
             className={`px-3 sm:px-3.5 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 whitespace-nowrap flex-1 sm:flex-none text-center ${
-              activeTab === 'history' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'
+              activeTab === 'history' ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm' : 'hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <History className="h-3.5 w-3.5" />
@@ -135,16 +135,16 @@ export const InterviewPage: React.FC = () => {
       {activeTab === 'practice' ? (
         <div className="space-y-6">
           {/* Controls Bar: Role, Category, Difficulty */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                   Target Domain Role
                 </label>
                 <select
                   value={roleFilter}
                   onChange={(e) => setRoleFilter(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                   <option value="Data Scientist">Data Scientist</option>
                   <option value="Machine Learning Engineer">Machine Learning Engineer</option>
@@ -155,13 +155,13 @@ export const InterviewPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                   Interview Category
                 </label>
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                   <option value="technical">Technical Questions</option>
                   <option value="hr">HR & Behavioral</option>
@@ -170,13 +170,13 @@ export const InterviewPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                   Question Difficulty
                 </label>
                 <select
                   value={difficultyFilter}
                   onChange={(e) => setDifficultyFilter(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                   <option value="beginner">Beginner / Fresher</option>
                   <option value="intermediate">Intermediate (Standard)</option>
@@ -189,46 +189,46 @@ export const InterviewPage: React.FC = () => {
           {/* Question & Practice Form */}
           {isLoading ? (
             <div className="flex min-h-[300px] items-center justify-center">
-              <div className="flex flex-col items-center gap-3 text-slate-500 text-xs">
+              <div className="flex flex-col items-center gap-3 text-slate-500 dark:text-slate-400 text-xs">
                 <div className="h-7 w-7 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
                 <p>Loading curated interview questions...</p>
               </div>
             </div>
           ) : !activeQuestion ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-xs text-slate-500">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-10 text-center text-xs text-slate-500 dark:text-slate-400">
               No questions found for the selected combination. Try switching role or difficulty.
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Question & Answer Box (8 cols) */}
               <div className="lg:col-span-8 space-y-6">
-                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                     <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-brand-50 text-brand-700 border border-brand-200">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
                         {activeQuestion.category}
                       </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-100 text-slate-600">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                         {activeQuestion.difficulty}
                       </span>
                     </div>
-                    <span className="text-xs text-slate-400 font-medium">Target: {activeQuestion.role}</span>
+                    <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">Target: {activeQuestion.role}</span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 leading-snug">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">
                     {activeQuestion.question}
                   </h3>
 
                   {activeQuestion.tips && (
-                    <div className="rounded-xl bg-amber-50/70 border border-amber-200/80 p-3 text-xs text-amber-900 flex items-start gap-2">
-                      <Lightbulb className="h-4 w-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                    <div className="rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/50 p-3 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                      <Lightbulb className="h-4 w-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
                       <span><strong>Recruiter Tip:</strong> {activeQuestion.tips}</span>
                     </div>
                   )}
 
                   <form onSubmit={handleSubmit} className="space-y-3 pt-2">
-                    <div className="flex items-center justify-between text-xs text-slate-500">
-                      <label className="font-semibold text-slate-700">Your Technical Response</label>
+                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                      <label className="font-semibold text-slate-700 dark:text-slate-300">Your Technical Response</label>
                       <span>{wordCount} words (aim for 35 - 150 words)</span>
                     </div>
                     <textarea
@@ -237,7 +237,7 @@ export const InterviewPage: React.FC = () => {
                       value={userAnswer}
                       onChange={(e) => setUserAnswer(e.target.value)}
                       placeholder="Type your explanation here. Touch upon key trade-offs, architecture, and practical examples..."
-                      className="w-full p-3.5 text-xs rounded-xl border border-slate-300 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500 font-normal leading-relaxed"
+                      className="w-full p-3.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 font-normal leading-relaxed"
                     />
 
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
@@ -247,7 +247,7 @@ export const InterviewPage: React.FC = () => {
                           // Load sample answer into input for testing
                           setUserAnswer((activeQuestion.sample_good_answer || 'Bias is error from inaccurate assumptions leading to underfitting, whereas variance is sensitivity to fluctuations. Regularization penalizes complex weights.').slice(0, 180) + '...');
                         }}
-                        className="text-xs text-brand-600 hover:text-brand-700 font-medium text-left sm:text-left py-1"
+                        className="text-xs text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium text-left sm:text-left py-1"
                       >
                         ⚡ Insert Sample Answer Snippet
                       </button>
@@ -266,16 +266,16 @@ export const InterviewPage: React.FC = () => {
 
                 {/* AI Evaluation Card */}
                 {evaluation && (
-                  <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4 animate-slide-up">
-                    <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                  <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4 animate-slide-up">
+                    <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
                       <div className="flex items-center gap-3">
                         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-black text-lg shadow-sm">
                           {evaluation.score}
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-slate-900">AI Evaluation Report</h4>
+                          <h4 className="text-sm font-bold text-slate-900 dark:text-white">AI Evaluation Report</h4>
                           <span className={`inline-block text-[11px] font-bold px-2 py-0.5 rounded-full mt-0.5 ${
-                            evaluation.score >= 80 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                            evaluation.score >= 80 ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
                           }`}>
                             Verdict: {evaluation.correctness}
                           </span>
@@ -283,30 +283,30 @@ export const InterviewPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="rounded-xl bg-slate-50 p-4 border border-slate-100 text-xs text-slate-700 leading-relaxed">
+                    <div className="rounded-xl bg-slate-50 dark:bg-slate-800/80 p-4 border border-slate-100 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                       <strong>Constructive Feedback:</strong> {evaluation.feedback}
                     </div>
 
                     {/* Points Covered vs Missing */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                      <div className="rounded-xl bg-emerald-50/70 border border-emerald-200 p-3.5">
-                        <p className="font-bold text-emerald-800 mb-1.5">Key Concepts Covered ({evaluation.key_points_covered?.length || 0}):</p>
+                      <div className="rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/50 p-3.5">
+                        <p className="font-bold text-emerald-800 dark:text-emerald-300 mb-1.5">Key Concepts Covered ({evaluation.key_points_covered?.length || 0}):</p>
                         <ul className="space-y-1">
                           {evaluation.key_points_covered?.map((kp, i) => (
-                            <li key={i} className="flex items-start gap-1.5 text-[11px] text-emerald-900">
-                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                            <li key={i} className="flex items-start gap-1.5 text-[11px] text-emerald-900 dark:text-emerald-200">
+                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
                               <span>{kp}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="rounded-xl bg-rose-50/70 border border-rose-200 p-3.5">
-                        <p className="font-bold text-rose-800 mb-1.5">Points to Mention Next Time ({evaluation.missing_points?.length || 0}):</p>
+                      <div className="rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 p-3.5">
+                        <p className="font-bold text-rose-800 dark:text-rose-300 mb-1.5">Points to Mention Next Time ({evaluation.missing_points?.length || 0}):</p>
                         <ul className="space-y-1">
                           {evaluation.missing_points?.map((mp, i) => (
-                            <li key={i} className="flex items-start gap-1.5 text-[11px] text-rose-900">
-                              <AlertCircle className="h-3.5 w-3.5 text-rose-600 flex-shrink-0 mt-0.5" />
+                            <li key={i} className="flex items-start gap-1.5 text-[11px] text-rose-900 dark:text-rose-200">
+                              <AlertCircle className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400 flex-shrink-0 mt-0.5" />
                               <span>{mp}</span>
                             </li>
                           ))}
@@ -315,20 +315,20 @@ export const InterviewPage: React.FC = () => {
                     </div>
 
                     {/* Expandable Benchmark Model Answer */}
-                    <div className="pt-2 border-t border-slate-100">
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                       <button
                         onClick={() => setShowModelAnswer(!showModelAnswer)}
-                        className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-xs font-semibold text-slate-700 transition-colors"
+                        className="w-full flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors"
                       >
                         <span className="flex items-center gap-1.5">
-                          <BookOpen className="h-4 w-4 text-brand-600" />
+                          <BookOpen className="h-4 w-4 text-brand-600 dark:text-brand-400" />
                           View Benchmark Model Answer
                         </span>
                         {showModelAnswer ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                       </button>
 
                       {showModelAnswer && (
-                        <div className="mt-3 p-4 rounded-xl bg-slate-900 text-slate-200 text-xs leading-relaxed whitespace-pre-line font-mono">
+                        <div className="mt-3 p-4 rounded-xl bg-slate-900 dark:bg-slate-950 text-slate-200 text-xs leading-relaxed whitespace-pre-line font-mono border border-slate-800">
                           {evaluation.model_answer}
                         </div>
                       )}
@@ -338,8 +338,8 @@ export const InterviewPage: React.FC = () => {
               </div>
 
               {/* Sidebar: Question Bank Selector (4 cols) */}
-              <div className="lg:col-span-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <div className="lg:col-span-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Question Bank ({questions.length})
                 </h4>
                 <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
@@ -354,11 +354,11 @@ export const InterviewPage: React.FC = () => {
                       }}
                       className={`w-full text-left p-3 rounded-xl border text-xs transition-all ${
                         activeQuestion?.id === q.id
-                          ? 'bg-brand-50 border-brand-300 text-brand-900 font-semibold shadow-sm'
-                          : 'border-slate-100 bg-slate-50/50 hover:bg-slate-50 text-slate-700'
+                          ? 'bg-brand-50 dark:bg-brand-950/60 border-brand-300 dark:border-brand-700 text-brand-900 dark:text-brand-300 font-semibold shadow-sm'
+                          : 'border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}
                     >
-                      <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <div className="flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500 mb-1">
                         <span>Q{idx + 1}</span>
                         <span className="capitalize">{q.difficulty}</span>
                       </div>
@@ -372,26 +372,26 @@ export const InterviewPage: React.FC = () => {
         </div>
       ) : (
         /* History View */
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-          <h3 className="text-base font-bold text-slate-900">Past Mock Interview Submissions</h3>
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">Past Mock Interview Submissions</h3>
           {history.length === 0 ? (
-            <p className="text-xs text-slate-500 py-8 text-center">No submissions recorded yet. Start practicing questions!</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 py-8 text-center">No submissions recorded yet. Start practicing questions!</p>
           ) : (
             <div className="space-y-4">
               {history.map((sub) => (
-                <div key={sub.id} className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2 text-xs">
+                <div key={sub.id} className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-2 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-slate-900">{sub.question_text}</span>
+                    <span className="font-bold text-slate-900 dark:text-white">{sub.question_text}</span>
                     <span className={`px-2.5 py-0.5 rounded-full font-bold text-[11px] ${
-                      sub.score >= 80 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                      sub.score >= 80 ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300'
                     }`}>
                       {sub.score}/100 • {sub.correctness}
                     </span>
                   </div>
-                  <p className="text-slate-600 bg-white p-2.5 rounded-lg border border-slate-200/80 italic">
+                  <p className="text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-700 italic">
                     "{sub.user_answer}"
                   </p>
-                  <p className="text-slate-700"><strong>AI Feedback:</strong> {sub.feedback}</p>
+                  <p className="text-slate-700 dark:text-slate-300"><strong>AI Feedback:</strong> {sub.feedback}</p>
                 </div>
               ))}
             </div>

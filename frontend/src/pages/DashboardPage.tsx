@@ -183,15 +183,15 @@ export const DashboardPage: React.FC = () => {
       {/* Career Readiness Overview & Skill Gaps */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Readiness Meter & Roadmap Shortcut */}
-        <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div className="lg:col-span-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div>
-              <h2 className="text-base font-bold text-slate-900">Placement Readiness Overview</h2>
-              <p className="text-xs text-slate-500">Benchmark calculated against active tech hiring standards</p>
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">Placement Readiness Overview</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Benchmark calculated against active tech hiring standards</p>
             </div>
             <Link
               to="/app/skills"
-              className="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1"
+              className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 flex items-center gap-1"
             >
               Skill Gap Dashboard <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -200,10 +200,10 @@ export const DashboardPage: React.FC = () => {
           <div className="mt-6 space-y-4">
             <div>
               <div className="flex justify-between text-xs font-semibold mb-1.5">
-                <span className="text-slate-700">Role Competency Fulfillment</span>
-                <span className="text-brand-600">{readinessScore}% Complete</span>
+                <span className="text-slate-700 dark:text-slate-300">Role Competency Fulfillment</span>
+                <span className="text-brand-600 dark:text-brand-400">{readinessScore}% Complete</span>
               </div>
-              <div className="h-3 w-full rounded-full bg-slate-100 overflow-hidden">
+              <div className="h-3 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-brand-500 to-indigo-600 transition-all duration-700"
                   style={{ width: `${readinessScore}%` }}
@@ -213,9 +213,9 @@ export const DashboardPage: React.FC = () => {
 
             {/* High Priority Gaps */}
             {summary?.high_priority_gaps && summary.high_priority_gaps.length > 0 && (
-              <div className="mt-4 rounded-xl bg-amber-50/70 border border-amber-200/80 p-4">
-                <div className="flex items-center gap-2 text-xs font-bold text-amber-900 mb-2">
-                  <AlertCircle className="h-4 w-4 text-amber-600" />
+              <div className="mt-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/50 p-4">
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-900 dark:text-amber-200 mb-2">
+                  <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                   <span>Immediate High-ROI Skills to Learn for Campus Drives</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -223,7 +223,7 @@ export const DashboardPage: React.FC = () => {
                     <Link
                       key={gap}
                       to={`/app/skills?highlight=${encodeURIComponent(gap)}`}
-                      className="px-3 py-1 bg-white border border-amber-300 rounded-lg text-xs font-semibold text-amber-800 hover:bg-amber-100 transition-colors"
+                      className="px-3 py-1 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-700 rounded-lg text-xs font-semibold text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
                     >
                       ⚡ Learn {gap} →
                     </Link>
@@ -236,43 +236,43 @@ export const DashboardPage: React.FC = () => {
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
               <Link
                 to="/app/roadmap"
-                className="p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-brand-50 hover:border-brand-200 transition-all text-left group"
+                className="p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 hover:bg-brand-50 dark:hover:bg-brand-950/50 hover:border-brand-200 dark:hover:border-brand-800/80 transition-all text-left group"
               >
-                <p className="text-xs font-bold text-slate-800 group-hover:text-brand-700">Career Roadmap</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">View your 4-phase timeline</p>
+                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-700 dark:group-hover:text-brand-400">Career Roadmap</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">View your 4-phase timeline</p>
               </Link>
               <Link
                 to="/app/interview"
-                className="p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 transition-all text-left group"
+                className="p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 hover:border-indigo-200 dark:hover:border-indigo-800/80 transition-all text-left group"
               >
-                <p className="text-xs font-bold text-slate-800 group-hover:text-indigo-700">Mock Interview</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">Solve a question in 5 mins</p>
+                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-700 dark:group-hover:text-indigo-400">Mock Interview</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Solve a question in 5 mins</p>
               </Link>
               <Link
                 to="/app/jobs"
-                className="p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 transition-all text-left group"
+                className="p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:border-emerald-200 dark:hover:border-emerald-800/80 transition-all text-left group"
               >
-                <p className="text-xs font-bold text-slate-800 group-hover:text-emerald-700">Job Matches</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">15 active verified openings</p>
+                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-700 dark:group-hover:text-emerald-400">Job Matches</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">15 active verified openings</p>
               </Link>
             </div>
           </div>
         </div>
 
         {/* Recent Activity Feed */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col justify-between">
           <div>
-            <h2 className="text-base font-bold text-slate-900 pb-4 border-b border-slate-100">Recent Activity</h2>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white pb-4 border-b border-slate-100 dark:border-slate-800">Recent Activity</h2>
             <div className="mt-4 space-y-3.5">
               {summary?.recent_activities && summary.recent_activities.length > 0 ? (
                 summary.recent_activities.map((act) => (
                   <div key={act.id} className="flex items-start gap-3 text-xs">
-                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-700 font-bold">
+                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold">
                       •
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-slate-800 truncate">{act.title}</p>
-                      <p className="text-[11px] text-slate-500 line-clamp-1">{act.description}</p>
+                      <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">{act.title}</p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">{act.description}</p>
                     </div>
                     <span className="text-[10px] text-slate-400 whitespace-nowrap">{act.timestamp}</span>
                   </div>
@@ -283,10 +283,10 @@ export const DashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-slate-100">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
             <Link
               to="/app/profile"
-              className="text-xs font-medium text-slate-500 hover:text-slate-800 flex items-center justify-between"
+              className="text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-between"
             >
               <span>Manage Profile & Skills</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -299,12 +299,12 @@ export const DashboardPage: React.FC = () => {
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-900">Top Recommended Jobs for You</h2>
-            <p className="text-xs text-slate-500">Based on your {user?.career_goal || 'current'} skills & profile match score</p>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Top Recommended Jobs for You</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Based on your {user?.career_goal || 'current'} skills & profile match score</p>
           </div>
           <Link
             to="/app/jobs"
-            className="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1"
+            className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 flex items-center gap-1"
           >
             View All Jobs <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -322,7 +322,7 @@ export const DashboardPage: React.FC = () => {
               />
             ))
           ) : (
-            <p className="text-xs text-slate-500 col-span-3 py-6 text-center">
+            <p className="text-xs text-slate-500 dark:text-slate-400 col-span-3 py-6 text-center">
               No jobs found. Check back soon or adjust your skill profile.
             </p>
           )}
@@ -338,27 +338,27 @@ export const DashboardPage: React.FC = () => {
           maxWidth="xl"
         >
           <div className="space-y-4 text-xs">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
-                <span className="text-sm font-bold text-slate-900">{selectedJob.company}</span>
-                <p className="text-slate-500">{selectedJob.location} • {selectedJob.job_type}</p>
+                <span className="text-sm font-bold text-slate-900 dark:text-white">{selectedJob.company}</span>
+                <p className="text-slate-500 dark:text-slate-400">{selectedJob.location} • {selectedJob.job_type}</p>
               </div>
               <div className="text-right">
-                <span className="text-xs font-bold text-slate-800">{selectedJob.salary_range}</span>
-                <p className="text-[11px] font-semibold text-brand-600">{selectedJob.match_percentage}% Profile Match</p>
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">{selectedJob.salary_range}</span>
+                <p className="text-[11px] font-semibold text-brand-600 dark:text-brand-400">{selectedJob.match_percentage}% Profile Match</p>
               </div>
             </div>
 
             <div>
-              <h4 className="font-bold text-slate-900 mb-1">Role Description</h4>
-              <p className="text-slate-600 leading-relaxed">{selectedJob.description}</p>
+              <h4 className="font-bold text-slate-900 dark:text-white mb-1">Role Description</h4>
+              <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{selectedJob.description}</p>
             </div>
 
             <div>
-              <h4 className="font-bold text-slate-900 mb-1.5">Required Skills</h4>
+              <h4 className="font-bold text-slate-900 dark:text-white mb-1.5">Required Skills</h4>
               <div className="flex flex-wrap gap-1.5">
                 {selectedJob.required_skills?.map((s) => (
-                  <span key={s} className="px-2 py-0.5 rounded bg-slate-100 font-medium text-slate-700">
+                  <span key={s} className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-medium text-slate-700 dark:text-slate-300">
                     {s}
                   </span>
                 ))}
@@ -366,19 +366,19 @@ export const DashboardPage: React.FC = () => {
             </div>
 
             {selectedJob.why_matched && (
-              <div className="rounded-xl bg-blue-50 border border-blue-200 p-3 text-blue-900">
+              <div className="rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 p-3 text-blue-900 dark:text-blue-200">
                 <p className="font-bold mb-1 flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+                  <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                   Why you match:
                 </p>
                 <p>{selectedJob.why_matched}</p>
               </div>
             )}
 
-            <div className="pt-3 border-t border-slate-100 flex justify-end gap-2">
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-2">
               <button
                 onClick={() => setSelectedJob(null)}
-                className="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
+                className="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 Close
               </button>

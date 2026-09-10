@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import { BottomNav } from './components/BottomNav';
@@ -29,7 +30,7 @@ const AppLayout: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
       <Navbar
         onMenuToggle={() => setIsMobileDrawerOpen((prev) => !prev)}
         isMenuOpen={isMobileDrawerOpen}
@@ -50,32 +51,34 @@ const AppLayout: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Public Marketing & Auth Routes */}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/profile-setup" element={<ProfileSetupPage />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Marketing & Auth Routes */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/profile-setup" element={<ProfileSetupPage />} />
 
-          {/* Protected Application Modules */}
-          <Route path="/app" element={<AppLayout />}>
-            <Route index element={<Navigate to="/app/dashboard" replace />} />
-            <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="jobs" element={<JobsPage />} />
-            <Route path="resume" element={<ResumePage />} />
-            <Route path="skills" element={<SkillGapPage />} />
-            <Route path="interview" element={<InterviewPage />} />
-            <Route path="roadmap" element={<RoadmapPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-          </Route>
+            {/* Protected Application Modules */}
+            <Route path="/app" element={<AppLayout />}>
+              <Route index element={<Navigate to="/app/dashboard" replace />} />
+              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="jobs" element={<JobsPage />} />
+              <Route path="resume" element={<ResumePage />} />
+              <Route path="skills" element={<SkillGapPage />} />
+              <Route path="interview" element={<InterviewPage />} />
+              <Route path="roadmap" element={<RoadmapPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

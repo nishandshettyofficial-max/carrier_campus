@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Compass, Sparkles, ArrowRight, Lock, Mail, AlertCircle } from 'lucide-react';
+import { Compass, Sparkles, ArrowRight, Lock, Mail, AlertCircle, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('demo@careercompass.ai');
@@ -10,6 +11,7 @@ export const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login, demoLogin } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -25,7 +27,19 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors">
+      {/* Top right theme toggle */}
+      <div className="absolute top-4 right-4 z-20">
+        <button
+          onClick={toggleTheme}
+          className="p-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm transition-all"
+          title={isDark ? "Switch to Day mode" : "Switch to Dark mode"}
+          aria-label="Toggle theme"
+        >
+          {isDark ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-600" />}
+        </button>
+      </div>
+
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-500/10 blur-[120px] rounded-full pointer-events-none" />
 
@@ -34,24 +48,24 @@ export const LoginPage: React.FC = () => {
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white shadow-md shadow-brand-500/30">
             <Compass className="h-6 w-6" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white">CareerCompass</span>
+          <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">CareerCompass</span>
         </Link>
-        <h2 className="mt-4 text-2xl font-bold tracking-tight text-white">
+        <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">
           Or{' '}
-          <Link to="/signup" className="font-semibold text-brand-400 hover:text-brand-300">
+          <Link to="/signup" className="font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-500 dark:hover:text-brand-300">
             create a new student profile
           </Link>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10">
-        <div className="bg-slate-950/80 border border-slate-800 py-8 px-4 shadow-xl rounded-2xl sm:px-10 backdrop-blur-md">
+        <div className="bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 py-8 px-4 shadow-xl rounded-2xl sm:px-10 backdrop-blur-md">
           {/* Quick Demo Login Option */}
-          <div className="mb-6 rounded-xl bg-brand-500/10 border border-brand-500/25 p-4 text-center">
-            <p className="text-xs text-brand-300 font-medium mb-2.5">
+          <div className="mb-6 rounded-xl bg-brand-50 dark:bg-brand-500/10 border border-brand-200 dark:border-brand-500/25 p-4 text-center">
+            <p className="text-xs text-brand-700 dark:text-brand-300 font-medium mb-2.5">
               Evaluating for degree presentation?
             </p>
             <button
@@ -66,15 +80,15 @@ export const LoginPage: React.FC = () => {
 
           <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-800" />
+              <div className="w-full border-t border-slate-200 dark:border-slate-800" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="bg-slate-950 px-2 text-slate-500 font-medium">Or enter credentials</span>
+              <span className="bg-white dark:bg-slate-950 px-2 text-slate-500 font-medium">Or enter credentials</span>
             </div>
           </div>
 
           {error && (
-            <div className="mb-4 rounded-lg bg-rose-500/10 border border-rose-500/30 p-3 text-xs text-rose-300 flex items-center gap-2">
+            <div className="mb-4 rounded-lg bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 p-3 text-xs text-rose-700 dark:text-rose-300 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -82,9 +96,9 @@ export const LoginPage: React.FC = () => {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-xs font-medium text-slate-300">Email address</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">Email address</label>
               <div className="mt-1 relative rounded-lg shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
                   <Mail className="h-4 w-4" />
                 </div>
                 <input
@@ -92,16 +106,16 @@ export const LoginPage: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="block w-full pl-10 pr-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
                   placeholder="student@university.edu"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300">Password</label>
+              <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">Password</label>
               <div className="mt-1 relative rounded-lg shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
                   <Lock className="h-4 w-4" />
                 </div>
                 <input
@@ -109,18 +123,18 @@ export const LoginPage: React.FC = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 text-xs rounded-lg border border-slate-800 bg-slate-900 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="block w-full pl-10 pr-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
                   placeholder="••••••••"
                 />
               </div>
             </div>
 
             <div className="flex items-center justify-between text-xs">
-              <label className="flex items-center text-slate-400">
-                <input type="checkbox" defaultChecked className="rounded border-slate-800 bg-slate-900 text-brand-600 mr-2" />
+              <label className="flex items-center text-slate-600 dark:text-slate-400">
+                <input type="checkbox" defaultChecked className="rounded border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-brand-600 mr-2" />
                 Remember me
               </label>
-              <a href="#" onClick={(e) => { e.preventDefault(); alert("Password reset link simulated: Please use password123 for demo."); }} className="font-medium text-brand-400 hover:text-brand-300">
+              <a href="#" onClick={(e) => { e.preventDefault(); alert("Password reset link simulated: Please use password123 for demo."); }} className="font-medium text-brand-600 dark:text-brand-400 hover:text-brand-500 dark:hover:text-brand-300">
                 Forgot password?
               </a>
             </div>

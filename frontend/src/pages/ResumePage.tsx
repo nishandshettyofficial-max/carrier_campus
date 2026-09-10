@@ -117,26 +117,26 @@ export const ResumePage: React.FC = () => {
     <div className="space-y-8 animate-fade-in">
       {/* Header */}
       <div>
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 border border-blue-200 mb-2">
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 px-3 py-1 text-xs font-semibold text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900/50 mb-2">
           <ShieldCheck className="h-3.5 w-3.5" />
           Transparent Rubric Scoring • No Fake ATS Guarantees
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Resume Analysis & Improvement</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Resume Analysis & Improvement</h1>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
           Extract technical skills, verify quantitative impact metrics, detect action verbs, and benchmark your resume against specific target openings.
         </p>
       </div>
 
       {/* Upload Zone */}
-      <div className="rounded-2xl border-2 border-dashed border-slate-300 bg-white p-6 text-center hover:border-brand-500 transition-colors relative">
-        <UploadCloud className="mx-auto h-10 w-10 text-slate-400 mb-2" />
-        <h3 className="text-sm font-bold text-slate-800">Upload your Resume (PDF)</h3>
-        <p className="text-xs text-slate-500 mt-1">
+      <div className="rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 text-center hover:border-brand-500 transition-colors relative">
+        <UploadCloud className="mx-auto h-10 w-10 text-slate-400 dark:text-slate-500 mb-2" />
+        <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Upload your Resume (PDF)</h3>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
           Drag and drop your file here, or click browse to upload from your device.
         </p>
 
         {errorMsg && (
-          <div className="mt-3 inline-flex items-center gap-2 rounded-lg bg-rose-50 border border-rose-200 p-2 text-xs text-rose-700">
+          <div className="mt-3 inline-flex items-center gap-2 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 p-2 text-xs text-rose-700 dark:text-rose-300">
             <AlertTriangle className="h-4 w-4" />
             <span>{errorMsg}</span>
           </div>
@@ -158,16 +158,16 @@ export const ResumePage: React.FC = () => {
             type="button"
             onClick={handleLoadSample}
             disabled={isUploading}
-            className="px-4 py-2 rounded-xl text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 hover:bg-indigo-100 transition-colors flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors flex items-center gap-1.5"
           >
-            <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
             Load Sample Student Resume (Aditi Rao)
           </button>
 
           <button
             type="button"
             onClick={() => setShowPastedMode(!showPastedMode)}
-            className="px-3.5 py-2 rounded-xl text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 transition-colors"
+            className="px-3.5 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
           >
             {showPastedMode ? 'Hide Text Area' : 'Or Paste Raw Resume Text'}
           </button>
@@ -181,7 +181,7 @@ export const ResumePage: React.FC = () => {
               value={pastedText}
               onChange={(e) => setPastedText(e.target.value)}
               placeholder="Paste the text of your resume here..."
-              className="w-full p-3 text-xs rounded-xl border border-slate-300 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full p-3 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500"
             />
             <button
               onClick={handlePastedSubmit}
@@ -198,8 +198,8 @@ export const ResumePage: React.FC = () => {
       {analysis && (
         <div className="space-y-6">
           {/* Main Score Banner */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-slate-100">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 sm:p-6 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-5">
                 <div className="flex h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-500/25">
                   <div className="text-center">
@@ -209,12 +209,12 @@ export const ResumePage: React.FC = () => {
                 </div>
                 <div>
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <h2 className="text-lg sm:text-xl font-bold text-slate-900">Overall Resume Score</h2>
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Overall Resume Score</h2>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                       {analysis.score >= 75 ? 'Placement Ready' : 'Needs Optimization'}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     Evaluated for <strong>{analysis.filename}</strong> with multi-category rubric analysis.
                   </p>
                 </div>
@@ -222,27 +222,27 @@ export const ResumePage: React.FC = () => {
 
               {/* Sub-Score Pills */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-100 dark:border-slate-700">
                   <p className="text-[10px] font-bold text-slate-400 uppercase">Sections</p>
-                  <p className="text-sm font-bold text-slate-800 mt-0.5">
+                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                     {analysis.score_breakdown?.sections || 25} / 25
                   </p>
                 </div>
-                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-100 dark:border-slate-700">
                   <p className="text-[10px] font-bold text-slate-400 uppercase">Skills Breadth</p>
-                  <p className="text-sm font-bold text-slate-800 mt-0.5">
+                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                     {analysis.score_breakdown?.skills || 25} / 30
                   </p>
                 </div>
-                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-100 dark:border-slate-700">
                   <p className="text-[10px] font-bold text-slate-400 uppercase">Impact Metrics</p>
-                  <p className="text-sm font-bold text-slate-800 mt-0.5">
+                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                     {analysis.score_breakdown?.impact || 20} / 25
                   </p>
                 </div>
-                <div className="rounded-xl bg-slate-50 p-3 border border-slate-100">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-100 dark:border-slate-700">
                   <p className="text-[10px] font-bold text-slate-400 uppercase">Action Verbs</p>
-                  <p className="text-sm font-bold text-slate-800 mt-0.5">
+                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                     {analysis.score_breakdown?.formatting || 18} / 20
                   </p>
                 </div>
@@ -250,7 +250,7 @@ export const ResumePage: React.FC = () => {
             </div>
 
             {/* Diagnostic Counters */}
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600">
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600 dark:text-slate-300">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 <span><strong>{analysis.extracted_skills?.length || 0}</strong> technical skills identified</span>
@@ -269,16 +269,16 @@ export const ResumePage: React.FC = () => {
           {/* Strengths & Improvements */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Strengths */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 pb-3 border-b border-slate-100">
-                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 text-xs font-bold">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
                   ✓
                 </span>
                 Detected Strengths
               </h3>
               <ul className="mt-4 space-y-2.5">
                 {analysis.strengths?.map((str, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
+                  <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                     <span>{str}</span>
                   </li>
@@ -287,17 +287,17 @@ export const ResumePage: React.FC = () => {
             </div>
 
             {/* Areas to Improve */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 pb-3 border-b border-slate-100">
-                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-amber-50 text-amber-600 text-xs font-bold">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 text-xs font-bold">
                   !
                 </span>
                 Actionable Areas to Improve
               </h3>
               <ul className="mt-4 space-y-2.5">
                 {analysis.areas_to_improve?.map((imp, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700">
-                    <span className="h-4 w-4 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                    <span className="h-4 w-4 rounded-full bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
                     <span>{imp}</span>
@@ -308,16 +308,16 @@ export const ResumePage: React.FC = () => {
           </div>
 
           {/* Extracted Skills Tag Cloud */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-900 mb-2">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
               Recognized Technical & Domain Skills ({analysis.extracted_skills?.length || 0})
             </h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Skills extracted from your resume via normalized ontology mapping:
             </p>
             <div className="flex flex-wrap gap-2">
               {analysis.extracted_skills?.map((s) => (
-                <span key={s} className="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-800 border border-slate-200">
+                <span key={s} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
                   {s}
                 </span>
               ))}
@@ -325,14 +325,14 @@ export const ResumePage: React.FC = () => {
           </div>
 
           {/* Compare Resume Against a Specific Job */}
-          <div className="rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50/50 to-blue-50/40 p-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-indigo-100">
+          <div className="rounded-2xl border border-indigo-100 dark:border-indigo-900/50 bg-gradient-to-r from-indigo-50/50 to-blue-50/40 dark:from-indigo-950/30 dark:to-slate-900/60 p-6 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-indigo-100 dark:border-indigo-900/50">
               <div>
-                <h3 className="text-sm font-bold text-indigo-950 flex items-center gap-2">
-                  <Briefcase className="h-4 w-4 text-indigo-600" />
+                <h3 className="text-sm font-bold text-indigo-950 dark:text-indigo-200 flex items-center gap-2">
+                  <Briefcase className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   Compare Resume Against Target Opening
                 </h3>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                   See how well your resume matches any specific job currently in the placement directory.
                 </p>
               </div>
@@ -341,7 +341,7 @@ export const ResumePage: React.FC = () => {
                 <select
                   value={selectedJobId || ''}
                   onChange={(e) => setSelectedJobId(Number(e.target.value))}
-                  className="w-full sm:w-auto px-3 py-2 text-xs rounded-xl border border-indigo-200 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+                  className="w-full sm:w-auto px-3 py-2 text-xs rounded-xl border border-indigo-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
                 >
                   {jobs.map((j) => (
                     <option key={j.id} value={j.id}>
@@ -364,7 +364,7 @@ export const ResumePage: React.FC = () => {
             {jobComparison && (
               <div className="mt-5 space-y-4 animate-slide-up">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-indigo-900">
+                  <span className="text-xs font-bold text-indigo-900 dark:text-indigo-200">
                     Fit for {jobComparison.job_title} at {jobComparison.company}
                   </span>
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-sm">
@@ -373,22 +373,22 @@ export const ResumePage: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="p-3.5 rounded-xl bg-white border border-emerald-200">
-                    <p className="font-bold text-emerald-800 mb-1.5">Resume Has ({jobComparison.matching_skills?.length || 0}):</p>
+                  <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-900/50">
+                    <p className="font-bold text-emerald-800 dark:text-emerald-300 mb-1.5">Resume Has ({jobComparison.matching_skills?.length || 0}):</p>
                     <div className="flex flex-wrap gap-1">
                       {jobComparison.matching_skills?.map((s: string) => (
-                        <span key={s} className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-medium text-[11px] border border-emerald-100">
+                        <span key={s} className="px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-medium text-[11px] border border-emerald-100 dark:border-emerald-900/50">
                           ✓ {s}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-white border border-rose-200">
-                    <p className="font-bold text-rose-800 mb-1.5">Add to Resume ({jobComparison.missing_skills?.length || 0}):</p>
+                  <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-200 dark:border-rose-900/50">
+                    <p className="font-bold text-rose-800 dark:text-rose-300 mb-1.5">Add to Resume ({jobComparison.missing_skills?.length || 0}):</p>
                     <div className="flex flex-wrap gap-1">
                       {jobComparison.missing_skills?.map((s: string) => (
-                        <span key={s} className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 font-medium text-[11px] border border-rose-100">
+                        <span key={s} className="px-2 py-0.5 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-medium text-[11px] border border-rose-100 dark:border-rose-900/50">
                           + {s}
                         </span>
                       ))}
@@ -396,7 +396,7 @@ export const ResumePage: React.FC = () => {
                   </div>
                 </div>
 
-                <p className="text-xs text-indigo-900/80 bg-white/70 p-3 rounded-lg border border-indigo-100">
+                <p className="text-xs text-indigo-900/80 dark:text-indigo-200/90 bg-white/70 dark:bg-slate-900/80 p-3 rounded-lg border border-indigo-100 dark:border-indigo-900/50">
                   {jobComparison.why_matched}
                 </p>
               </div>

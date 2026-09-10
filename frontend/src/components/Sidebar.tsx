@@ -9,9 +9,12 @@ import {
   Milestone,
   UserCheck,
   Sparkles,
-  X
+  X,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
   { name: 'Dashboard', path: '/app/dashboard', icon: LayoutDashboard },
@@ -30,6 +33,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
   const { user } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
 
   // Close drawer on ESC key
   useEffect(() => {
@@ -59,19 +63,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
       <div className="space-y-6">
         {/* User Mini Profile Card */}
         {user && (
-          <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-200/80">
+          <div className="rounded-xl bg-slate-50 dark:bg-slate-900 p-3.5 border border-slate-200/80 dark:border-slate-800 transition-colors">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-600 text-white font-bold text-sm shadow-sm flex-shrink-0">
                 {user.full_name.split(' ').map(n => n[0]).join('')}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-semibold text-slate-900">{user.full_name}</p>
-                <p className="truncate text-[11px] text-brand-600 font-medium">{user.career_goal}</p>
+                <p className="truncate text-xs font-semibold text-slate-900 dark:text-white">{user.full_name}</p>
+                <p className="truncate text-[11px] text-brand-600 dark:text-brand-400 font-medium">{user.career_goal}</p>
               </div>
             </div>
-            <div className="mt-3 pt-3 border-t border-slate-200/70 flex items-center justify-between text-[11px] text-slate-500">
+            <div className="mt-3 pt-3 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
               <span>Skills Logged:</span>
-              <span className="font-semibold text-slate-800 bg-slate-200/60 px-1.5 py-0.5 rounded">
+              <span className="font-semibold text-slate-800 dark:text-slate-200 bg-slate-200/60 dark:bg-slate-800 px-1.5 py-0.5 rounded">
                 {user.current_skills?.length || 0} skills
               </span>
             </div>
@@ -80,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
 
         {/* Navigation Menu */}
         <div className="space-y-1">
-          <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+          <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
             Modules
           </p>
           {navItems.map((item) => {
@@ -93,8 +97,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-brand-50 text-brand-700 font-semibold border-r-4 border-brand-600 shadow-sm'
-                      : 'text-slate-600 hover:bg-slate-100/80 hover:text-slate-900'
+                      ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-400 font-semibold border-r-4 border-brand-600 dark:border-brand-500 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-900 hover:text-slate-900 dark:hover:text-white'
                   }`
                 }
               >
@@ -106,15 +110,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
         </div>
       </div>
 
-      {/* Degree Project Badge */}
-      <div className="rounded-xl border border-indigo-100 bg-gradient-to-b from-indigo-50/70 to-blue-50/50 p-3.5 text-xs text-indigo-950">
-        <div className="flex items-center gap-2 font-semibold text-indigo-900 mb-1">
-          <Sparkles className="h-4 w-4 text-indigo-600" />
-          <span>AI & Data Science Project</span>
+      <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+        {/* Day / Dark Mode Switcher in Sidebar */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-xs font-medium"
+        >
+          <span className="flex items-center gap-2">
+            {isDark ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-slate-500" />}
+            <span>{isDark ? 'Day Mode (Light)' : 'Dark Mode'}</span>
+          </span>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            {isDark ? 'Active' : 'Dark'}
+          </span>
+        </button>
+
+        {/* Degree Project Badge */}
+        <div className="rounded-xl border border-indigo-100 dark:border-indigo-900/50 bg-gradient-to-b from-indigo-50/70 to-blue-50/50 dark:from-indigo-950/40 dark:to-slate-900/60 p-3.5 text-xs text-indigo-950 dark:text-indigo-200">
+          <div className="flex items-center gap-2 font-semibold text-indigo-900 dark:text-indigo-300 mb-1">
+            <Sparkles className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+            <span>AI & Data Science Project</span>
+          </div>
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            Autonomous matching, NLP resume parsing, and real-time interview evaluation engine.
+          </p>
         </div>
-        <p className="text-[11px] text-slate-600 leading-relaxed">
-          Autonomous matching, NLP resume parsing, and real-time interview evaluation engine.
-        </p>
       </div>
     </div>
   );
@@ -122,7 +143,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
   return (
     <>
       {/* Desktop Sidebar (hidden on mobile/tablet < md) */}
-      <aside className="hidden md:flex w-64 flex-shrink-0 border-r border-slate-200 bg-white min-h-[calc(100vh-4rem)] flex-col justify-between p-4 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+      <aside className="hidden md:flex w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 min-h-[calc(100vh-4rem)] flex-col justify-between p-4 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto transition-colors duration-200">
         {renderContent()}
       </aside>
 
@@ -137,14 +158,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
           />
 
           {/* Drawer Panel */}
-          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-white p-5 shadow-2xl z-50 overflow-y-auto">
+          <div className="relative flex-1 flex flex-col max-w-[280px] w-full bg-white dark:bg-slate-950 p-5 shadow-2xl z-50 overflow-y-auto border-r border-slate-200 dark:border-slate-800 transition-colors duration-200">
             {/* Drawer Header with Close Button */}
-            <div className="flex items-center justify-between pb-4 mb-2 border-b border-slate-100">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Navigation Menu</span>
+            <div className="flex items-center justify-between pb-4 mb-2 border-b border-slate-100 dark:border-slate-800">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Navigation Menu</span>
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
