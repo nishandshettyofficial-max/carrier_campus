@@ -12,33 +12,16 @@ export const LoginPage: React.FC = () => {
   const { login, demoLogin } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
-    try {
-      await login(email, password);
-      navigate('/app/dashboard');
-    } catch (err: any) {
-      console.warn('Sign-in handled gracefully:', err);
-      navigate('/app/dashboard');
-    } finally {
-      setIsLoading(false);
-    }
+    login(email, password);
+    navigate('/app/dashboard');
   };
 
-  const handleDemoLogin = async () => {
-    setError('');
-    setIsLoading(true);
-    try {
-      await demoLogin();
-      navigate('/app/dashboard');
-    } catch (err: any) {
-      console.warn('Demo login handled gracefully:', err);
-      navigate('/app/dashboard');
-    } finally {
-      setIsLoading(false);
-    }
+  const handleDemoLogin = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    demoLogin();
+    navigate('/app/dashboard');
   };
 
   return (

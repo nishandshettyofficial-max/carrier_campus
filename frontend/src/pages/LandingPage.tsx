@@ -24,12 +24,9 @@ export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  const handleDemoClick = async () => {
-    try {
-      await demoLogin();
-    } catch (e) {
-      console.warn('Demo login navigated gracefully:', e);
-    }
+  const handleDemoClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    demoLogin();
     navigate('/app/dashboard');
   };
 

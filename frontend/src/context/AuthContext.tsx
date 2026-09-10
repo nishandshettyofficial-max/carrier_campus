@@ -47,67 +47,75 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string) => {
-    setLoading(true);
-    try {
-      const res = await api.login({ email, password });
-      localStorage.setItem('career_compass_token', res.access_token);
-      setUser(res.user);
-    } catch (e) {
-      console.warn('Login fallback triggered:', e);
-      const fallback: User = {
-        ...DEMO_USER,
-        email: email || DEMO_USER.email,
-        full_name: email.split('@')[0].replace(/[^a-zA-Z]/g, ' ') || 'Student'
-      };
-      localStorage.setItem('career_compass_token', `token-${fallback.id}`);
-      saveStoredUser(fallback);
-      setUser(fallback);
-    } finally {
-      setLoading(false);
-    }
+    const isDemo = !email || email.trim() === 'demo@careercompass.ai' || email.includes('demo');
+    const existing = getStoredUser();
+    const resolvedUser: User = isDemo ? DEMO_USER : {
+      ...DEMO_USER,
+      email: email,
+      full_name: email.split('@')[0].replace(/[^a-zA-Z]/g, ' ') || 'Student User'
+    };
+
+    localStorage.setItem('career_compass_token', `token-${resolvedUser.id}`);
+    saveStoredUser(resolvedUser);
+    setUser(resolvedUser);
+    setLoading(false);
+
+    // Sync with backend in background
+    api.login({ email, password }).then((res) => {
+      if (res?.user) {
+        saveStoredUser(res.user);
+        setUser(res.user);
+      }
+    }).catch((e) => {
+      console.warn('Background login sync:', e);
+    });
   };
 
   const demoLogin = async () => {
-    setLoading(true);
-    try {
-      const res = await api.demoLogin();
-      localStorage.setItem('career_compass_token', res.access_token);
-      setUser(res.user);
-    } catch (e) {
-      console.warn('Demo login fallback triggered:', e);
-      localStorage.setItem('career_compass_token', 'token-user-1');
-      saveStoredUser(DEMO_USER);
-      setUser(DEMO_USER);
-    } finally {
-      setLoading(false);
-    }
+    // Instant zero-lag activation
+    localStorage.setItem('career_compass_token', 'token-user-1');
+    saveStoredUser(DEMO_USER);
+    setUser(DEMO_USER);
+    setLoading(false);
+
+    // Background sync with backend
+    api.demoLogin().then((res) => {
+      if (res?.user) {
+        saveStoredUser(res.user);
+        setUser(res.user);
+      }
+    }).catch((e) => {
+      console.warn('Background demo sync:', e);
+    });
   };
 
   const signup = async (data: any) => {
-    setLoading(true);
-    try {
-      const res = await api.signup(data);
-      localStorage.setItem('career_compass_token', res.access_token);
-      setUser(res.user);
-    } catch (e) {
-      console.warn('Signup fallback triggered:', e);
-      const newUser: User = {
-        id: Date.now(),
-        email: data.email,
-        full_name: data.full_name || 'Student Candidate',
-        degree: data.degree || 'B.Tech / Bachelor Degree',
-        year_of_study: data.year_of_study || 'Final Year (2026)',
-        career_goal: data.career_goal || 'Data Scientist',
-        experience_level: 'Entry Level / Fresher',
-        current_skills: ['Python', 'SQL', 'Git'],
-        created_at: new Date().toISOString()
-      };
-      localStorage.setItem('career_compass_token', `token-${newUser.id}`);
-      saveStoredUser(newUser);
-      setUser(newUser);
-    } finally {
-      setLoading(false);
-    }
+    const newUser: User = {
+      id: Date.now(),
+      email: data.email,
+      full_name: data.full_name || 'Student Candidate',
+      degree: data.degree || 'B.Tech / Bachelor Degree',
+      year_of_study: data.year_of_study || 'Final Year (2026)',
+      career_goal: data.career_goal || 'Data Scientist',
+      experience_level: 'Entry Level / Fresher',
+      current_skills: ['Python', 'SQL', 'Git'],
+      created_at: new Date().toISOString()
+    };
+
+    localStorage.setItem('career_compass_token', `token-${newUser.id}`);
+    saveStoredUser(newUser);
+    setUser(newUser);
+    setLoading(false);
+
+    // Background sync with backend
+    api.signup(data).then((res) => {
+      if (res?.user) {
+        saveStoredUser(res.user);
+        setUser(res.user);
+      }
+    }).catch((e) => {
+      console.warn('Background signup sync:', e);
+    });
   };
 
   const logout = () => {

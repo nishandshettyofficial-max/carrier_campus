@@ -240,29 +240,39 @@ async function request<T>(url: string, options: RequestInit = {}): Promise<T> {
     headers.set('Authorization', `Bearer ${token}`);
   }
 
-  const response = await fetch(`${BASE_URL}${url}`, {
-    ...options,
-    headers,
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 2500);
 
-  if (!response.ok) {
-    let errorDetail = 'An error occurred';
-    try {
-      const errJson = await response.json();
-      errorDetail = errJson.detail || JSON.stringify(errJson);
-    } catch {
-      errorDetail = response.statusText;
+  try {
+    const response = await fetch(`${BASE_URL}${url}`, {
+      ...options,
+      headers,
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      let errorDetail = 'An error occurred';
+      try {
+        const errJson = await response.json();
+        errorDetail = errJson.detail || JSON.stringify(errJson);
+      } catch {
+        errorDetail = response.statusText;
+      }
+      throw new Error(errorDetail);
     }
-    throw new Error(errorDetail);
-  }
 
-  // Ensure content type is JSON
-  const contentType = response.headers.get('content-type');
-  if (contentType && !contentType.includes('application/json')) {
-    throw new Error('Non-JSON response received from server');
-  }
+    const contentType = response.headers.get('content-type');
+    if (contentType && !contentType.includes('application/json')) {
+      throw new Error('Non-JSON response received from server');
+    }
 
-  return response.json();
+    return await response.json();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
 }
 
 export const api = {

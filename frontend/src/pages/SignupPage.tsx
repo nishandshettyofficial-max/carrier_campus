@@ -14,25 +14,15 @@ export const SignupPage: React.FC = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
-    try {
-      await signup({
-        full_name: fullName,
-        email,
-        password,
-        career_goal: careerGoal,
-      });
-      // Redirect to onboarding profile setup
-      navigate('/profile-setup');
-    } catch (err: any) {
-      console.warn('Signup handled gracefully:', err);
-      navigate('/profile-setup');
-    } finally {
-      setIsLoading(false);
-    }
+    signup({
+      full_name: fullName,
+      email,
+      password,
+      career_goal: careerGoal,
+    });
+    navigate('/profile-setup');
   };
 
   return (

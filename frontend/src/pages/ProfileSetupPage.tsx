@@ -43,26 +43,21 @@ export const ProfileSetupPage: React.FC = () => {
     }
   };
 
-  const handleSaveProfile = async () => {
+  const handleSaveProfile = () => {
     setIsSaving(true);
-    try {
-      if (user) {
-        await api.updateProfile({
-          degree,
-          year_of_study: yearOfStudy,
-          career_goal: careerGoal,
-          experience_level: experienceLevel,
-          current_skills: selectedSkills,
-        }, user.id);
-        await refreshUser();
-      }
-      navigate('/app/dashboard');
-    } catch (err) {
-      console.error('Failed to save profile:', err);
-      navigate('/app/dashboard');
-    } finally {
-      setIsSaving(false);
+    if (user) {
+      const updatedUser = {
+        ...user,
+        degree,
+        year_of_study: yearOfStudy,
+        career_goal: careerGoal,
+        experience_level: experienceLevel,
+        current_skills: selectedSkills,
+      };
+      api.updateProfile(updatedUser, user.id).catch(console.warn);
+      refreshUser().catch(console.warn);
     }
+    navigate('/app/dashboard');
   };
 
   return (
